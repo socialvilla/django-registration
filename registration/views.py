@@ -192,7 +192,10 @@ def register(request, backend, success_url=None, form_class=None,
             else:
                 return redirect(success_url)
     else:
-        form = form_class(data=request.GET)
+        if len(request.GET):
+            form = form_class(data=request.GET)
+        else:
+            form = form_class()
     
     if extra_context is None:
         extra_context = {}
